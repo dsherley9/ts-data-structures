@@ -28,13 +28,13 @@ class Queue<T> implements IQueue<T> {
         return this._queue.includes(item);
     }
 
-    copyTo(array: T[], index: number): void {
+    copyTo(array: T[], index: number = array.length): void {
         if (index < 0) throw new ArgumentOutOfRangeError('The given index cannot be less than 0.');
-        if (index >= array.length) throw new ArgumentError('The given index is greater than the total number of elements in the array.');
+        if (index > array.length) throw new ArgumentError('The given index cannot be greater than the total number of elements in the array.');
 
         for (let i = 0; i < this._queue.length; i++) {
             const element = this._queue[i];
-            array.push(element);
+            array[index + i] = element;
         }
     }
 
