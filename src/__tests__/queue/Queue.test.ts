@@ -1,5 +1,6 @@
 import ArgumentError from '../../errors/ArgumentError';
 import ArgumentOutOfRangeError from '../../errors/ArgumentOutOfRangeError';
+import InvalidOperationError from '../../errors/InvalidOperationError';
 import Queue from '../../queue/Queue';
 
 describe('count', () => {
@@ -72,5 +73,20 @@ describe('copyTo', () => {
         
         queue.copyTo(myArr);
         expect(myArr).toEqual(['d', 'e', 'f', 'a', 'b', 'c']);
+    });
+});
+
+describe('dequeue', () => {
+    it('should throw an InvalidOperationError if there are no items in the queue', () => {
+        const queue = new Queue<string>();
+        expect(() => queue.dequeue()).toThrow(InvalidOperationError);        
+    });
+
+    it('should return the first item in the queue', () => {
+        const queue = new Queue<string>(['a', 'b', 'c']);
+        const result = queue.dequeue();
+
+        expect(result).toEqual('a');
+        expect(queue.count).toEqual(2);
     });
 });
