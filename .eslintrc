@@ -2,12 +2,35 @@
     "root": true,
     "parser": "@typescript-eslint/parser",
     "plugins": [
-      "@typescript-eslint"
+      "@typescript-eslint",
+      "jest"
     ],
     "extends": [
       "eslint:recommended",
       "plugin:@typescript-eslint/eslint-recommended",
       "plugin:@typescript-eslint/recommended"
+    ],
+    "overrides": [
+        {
+            "parser": "@typescript-eslint/parser",
+            "plugins": [
+                "@typescript-eslint"
+            ],
+            "extends": [
+                "plugin:@typescript-eslint/recommended"
+            ],
+            "rules": {
+                "max-classes-per-file": [
+                    "error",
+                    1
+                ],
+                "@typescript-eslint/no-shadow": "error",
+                "@typescript-eslint/ban-types": []
+            },
+            "files": [
+                "*.ts"
+            ]
+        }
     ],
     "rules": {
       "constructor-super": "error",
