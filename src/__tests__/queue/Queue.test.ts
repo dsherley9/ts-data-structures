@@ -1,7 +1,7 @@
-import ArgumentError from '../../errors/ArgumentError';
+import ArgumentError           from '../../errors/ArgumentError';
 import ArgumentOutOfRangeError from '../../errors/ArgumentOutOfRangeError';
-import InvalidOperationError from '../../errors/InvalidOperationError';
-import Queue from '../../queue/Queue';
+import InvalidOperationError   from '../../errors/InvalidOperationError';
+import Queue                   from '../../queue/Queue';
 
 describe('count', () => {
     it('should return a count of 3', () => {
@@ -88,5 +88,15 @@ describe('dequeue', () => {
 
         expect(result).toEqual('a');
         expect(queue.count).toEqual(2);
+    });
+});
+
+describe('enqueue', () => {
+    it('should add the item to the queue', () => {
+        const queue = new Queue<string>();
+        queue.enqueue('test');
+
+        expect(queue.count).toEqual(1);
+        expect(queue.contains('test')).toEqual(true);
     });
 });
