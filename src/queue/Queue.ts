@@ -2,18 +2,18 @@ import { TryResult } from "../core/TryResult";
 import ArgumentError from "../errors/ArgumentError";
 import ArgumentOutOfRangeError from "../errors/ArgumentOutOfRangeError";
 import InvalidOperationError from "../errors/InvalidOperationError";
-import { IQueue } from "./IQueue";
+import QueueIterator from './QueueIterator';
 
-class Queue<T> implements IQueue<T> {
+class Queue<T> implements Iterable<T> {
     
     constructor(arr?: T[]) {
         if (arr) {
             this._queue = arr;
         }
-
+    
         return this;
     }
-    
+   
     private _queue: T[] = [];
 
     public get count() : number {
@@ -50,7 +50,7 @@ class Queue<T> implements IQueue<T> {
         this._queue.push(item);
     }
 
-    clone(): IQueue<T> {
+    clone(): Queue<T> {
         return new Queue(this.toArray());
     }
 
@@ -84,15 +84,8 @@ class Queue<T> implements IQueue<T> {
         }
     }
 
-    [Symbol.iterator](): IterableIterator<T> {
-        throw new Error("Method not implemented.");
-    }
-
-    next(): IteratorReturnResult<T | null> {
-        return {
-            done: true,
-            value: null
-        }
+    [Symbol.iterator](): Iterator<T> {
+        return new QueueIterator(this._queue);
     }
 }
 

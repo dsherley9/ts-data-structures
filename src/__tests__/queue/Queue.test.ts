@@ -100,3 +100,26 @@ describe('enqueue', () => {
         expect(queue.contains('test')).toEqual(true);
     });
 });
+
+describe('clone', () => {
+    it('should return a new instance of Queue with the same queued items', () => {
+        const queue = new Queue<string>(['a', 'b', 'c']);
+        const clone = queue.clone();
+
+        expect(clone).not.toBe(queue);
+    });
+});
+
+describe('peek', () => {
+    it('should throw if there are no queued items', () => {
+        const queue = new Queue<string>();
+        expect(() => queue.peek()).toThrow(InvalidOperationError);        
+    });
+
+    it('should return the first queued item', () => {
+        const queue = new Queue<string>(['a', 'b', 'c']);
+        const result = queue.peek();
+
+        expect(result).toEqual('a');
+    });
+});
