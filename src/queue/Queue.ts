@@ -2,7 +2,6 @@ import { TryResult } from "../core/TryResult";
 import ArgumentError from "../errors/ArgumentError";
 import ArgumentOutOfRangeError from "../errors/ArgumentOutOfRangeError";
 import InvalidOperationError from "../errors/InvalidOperationError";
-import QueueIterator from './QueueIterator';
 
 class Queue<T> implements Iterable<T> {
     
@@ -82,8 +81,10 @@ class Queue<T> implements Iterable<T> {
         return { value, result: (value !== null) };
     }
 
-    [Symbol.iterator](): Iterator<T> {
-        return new QueueIterator(this._queue);
+    *[Symbol.iterator](): Iterator<T> {
+        for (let i = 0; i < this._queue.length; i++) {
+            yield this._queue[i];
+        }
     }
 }
 
