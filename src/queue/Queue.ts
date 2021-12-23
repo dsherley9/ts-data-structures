@@ -67,21 +67,19 @@ class Queue<T> implements Iterable<T> {
     }
 
     tryPeek(): TryResult<T> {
-        const element = this._queue[0] || null;
+        const value = (this._queue.length)
+            ? this._queue[0] 
+            : null;
 
-        return {
-            value : element,
-            result: (element !== null)
-        }
+        return { value, result: (value !== null) };
     }
 
     tryDequeue(): TryResult<T> {
-        const element = this._queue.shift() || null;
+        const value = (this._queue.length)
+            ? this._queue.shift()!
+            : null;
 
-        return {
-            value : element,
-            result: (element !== null)
-        }
+        return { value, result: (value !== null) };
     }
 
     [Symbol.iterator](): Iterator<T> {

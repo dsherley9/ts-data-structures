@@ -123,3 +123,63 @@ describe('peek', () => {
         expect(result).toEqual('a');
     });
 });
+
+describe('toArray', () => {
+    it('should return an array of the queued items', () => {
+        const items = ['a', 'b', 'c'];
+        const queue = new Queue<string>(items); 
+        queue.enqueue('d');
+
+        const array = queue.toArray();
+        expect(array).toEqual(['a', 'b', 'c', 'd']);
+        expect(array).not.toBe(items);
+    });
+});
+
+describe('tryPeek', () => {
+    it('should return null and false when there is no head element', () => {
+        const queue = new Queue<string>();
+        expect(queue.tryPeek()).toEqual({
+            value: null,
+            result: false
+        }) ;
+    });
+
+    it('should return the first element and true when there is a head element', () => {
+        const queue = new Queue<string>(['b', 'c', 'a']);
+        expect(queue.tryPeek()).toEqual({
+            value: 'b',
+            result: true
+        });
+    });
+
+    it('should not remove any of the elements', () => {
+        const queue = new Queue<string>(['c', 'b', 'a']);
+        queue.tryPeek();
+        expect(queue.count).toEqual(3);
+    });
+});
+
+describe('tryDequeue', () => {
+    it('should return null and false when there is no head element', () => {
+        const queue = new Queue<string>();
+        expect(queue.tryDequeue()).toEqual({
+            value: null,
+            result: false
+        });
+    });
+
+    it('should return the first element and true when there is a head element', () => {
+        const queue = new Queue<string>(['c', 'b', 'a']);
+        expect(queue.tryDequeue()).toEqual({
+            value: 'c',
+            result: true
+        });
+    });
+
+    it('should remove the first element', () => {
+        const queue = new Queue<string>(['c', 'b', 'a']);
+        queue.tryDequeue();
+        expect(queue.count).toEqual(2);
+    });
+});
