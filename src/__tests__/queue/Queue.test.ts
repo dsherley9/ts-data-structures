@@ -183,3 +183,14 @@ describe('tryDequeue', () => {
         expect(queue.count).toEqual(2);
     });
 });
+
+describe('iterator', () => {
+    it('should be iterable', () => {
+        const queue = new Queue<string>();
+        queue.enqueue('a');
+        queue.enqueue('b');
+        queue.enqueue('c');
+        
+        expect([...queue]).toEqual(['a', 'b', 'c']);
+    });
+});
