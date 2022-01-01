@@ -1,7 +1,7 @@
-import ArgumentError           from '../../errors/ArgumentError';
-import ArgumentOutOfRangeError from '../../errors/ArgumentOutOfRangeError';
-import InvalidOperationError   from '../../errors/InvalidOperationError';
-import Queue                   from '../../queue/Queue';
+import ArgumentError           from '../../src/errors/ArgumentError';
+import ArgumentOutOfRangeError from '../../src/errors/ArgumentOutOfRangeError';
+import InvalidOperationError   from '../../src/errors/InvalidOperationError';
+import Queue                   from '../../src/queue/Queue';
 
 describe('count', () => {
     it('should return a count of 3', () => {
