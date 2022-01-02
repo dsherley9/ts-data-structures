@@ -7,9 +7,9 @@ class LinkedListNode<T> {
     }
 
     public value: T;
-    public list: LinkedList<T>;
-    public next: T;
-    public previous: T;
+    public list?: LinkedList<T>;
+    public next?: LinkedListNode<T>;
+    public previous?: LinkedListNode<T>;
 };
 
 export default LinkedListNode;
